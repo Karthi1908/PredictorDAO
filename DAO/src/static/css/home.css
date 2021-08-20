@@ -1,0 +1,21 @@
+.address{
+    font-size: 10px;
+    font-family: monospace;
+}
+
+.card{
+    margin-bottom: 30px;
+    width : 100%;
+}
+
+.img{
+    width: 100px;
+}
+
+.span{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+
