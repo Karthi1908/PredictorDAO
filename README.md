@@ -1,5 +1,8 @@
 # Predictor DAO
 
+Predictor DAO is DAO for the marketplace dapps. It follows minimalisitic design approach and suited for standalone DAOs.
+
+
 https://smartpy.io/explorer.html?address=KT1QiqdcKNowdh7FpPvifsmAJboS7b7japKj
 
 https://smartpy.io/explorer.html?address=KT1MUgaUdvHRcnbp3WTZdkso81BgkR8sFZMu
@@ -22,5 +25,5 @@ Add a proposal. ( proposal fee as defined in proposalFee need to be added)
 
 Proposal has an option to define two types of voting 1. Based on Vote and 2. Based on Stake(coin voting) ( resultType field controls the option)
 if result type is selected as Vote - result will be declared based on the count of individuals voted ( 1 person has 1 vote)
-if result type is selected as Stake - result will be declared based on the amount of tokens each individuals hold (1 token is 1 vote) So aperson with 200 tokens voted for proposal means 200 voted are polled for that option.
+if result type is selected as Stake - result will be declared based on the amount of tokens each individuals hold (1 token is 1 vote) So aperson with 200 tokens voted for proposal means 200 voted are polled for that option. 
 
