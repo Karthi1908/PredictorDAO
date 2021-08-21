@@ -1,6 +1,7 @@
 # Predictor DAO
 
 Predictor DAO is DAO for the marketplace dapps. It follows minimalisitic design approach and suited for standalone DAOs.
+Works well in Granadanet and so it is recommended to deploy smart contract only in Granadanet.
 
 
 ![image](https://user-images.githubusercontent.com/33004854/130331369-04b3b099-5cee-4010-b82b-d3d42180eb7e.png)
