@@ -1,16 +1,16 @@
-import React, { useState } from "react"
-import { getContract } from '../tezos';
+import React, { useState } from 'react';
+import {Tezos, getContract } from '../tezos';
 
-import '../static/css/register.css';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-function Register(){
+import '../static/css/transfer.css';
+
+function SubmitOptions(props){
 
     const [modalIsOpen, setIsOpen] = useState(false);
-    const [address, setaddress] = useState("");
-    
+    const [vote, setVote] = useState(0);
 
     function openModal(){
         setIsOpen(true);
@@ -21,13 +21,13 @@ function Register(){
     }
 
     async function handleClick() {
-        // Register here
-        
+        // Send tez
         const contract = await getContract();
-        const op =  await contract.methods.addDaoMembers(address).send();
+        const op =  await contract.methods.voteOnProposal( props.pID, vote ).send();
         await op.confirmation();
-        alert("Registered!")
-        
+        alert("Vote Submitted!")
+
+        setIsOpen(false);
     }
 
     return(
@@ -40,17 +40,15 @@ function Register(){
                 </Modal.Header>
                 <Modal.Body>
                     <Form.Group className="mb-3">
-                        <Form.Label>Useraddress</Form.Label>
-                        <Form.Control 
-                            type="text" 
-                            placeholder="Enter useraddress" 
-                            id="address"
-                            onChange={e => setaddress(e.target.value)}
-                            value={address}
-                            classaddress="modal-input"/>
+                        <Form.Label>Proposal options: </Form.Label>
+                         
+							<select value={vote} id="vote" onChange={e => setVote(e.target.value)}>
+								<option value="Agree">Agree</option>
+								<option value="DisAgree">Disagree</option>
+							</select>
+                                                
+				
                     </Form.Group>
-
-                   
                 </Modal.Body>
                 
                 <Modal.Footer>
@@ -58,9 +56,9 @@ function Register(){
                     <Button variant="primary" onClick={handleClick} className="modal-submit-btn">Submit</Button>
                 </Modal.Footer>
             </Modal>
-            <button onClick={openModal} className="btn btn-DaoDetails">REGISTER</button>
+            <button onClick={openModal} className="btn btn-transfer"><span className="text">Vote</span> 💰</button>
         </>
     );
 }
 
-export default Register;
+export default SubmitOptions;

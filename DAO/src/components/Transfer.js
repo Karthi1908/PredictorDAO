@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Tezos } from '../tezos';
+import {Tezos, getContract } from '../tezos';
 
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -22,9 +22,11 @@ function Transfer(props){
 
     async function handleClick() {
         // Send tez
-        
-        const op = await Tezos.wallet
-        	.transfer({to: props.address, amount: tez})
+        const contract = await getContract();
+		console.log(contract.address)
+	
+        const op = await Tezos.contract
+        	.transfer({to: contract.address, amount: tez})
         	.send()
         await op.confirmation()
         alert("Sent!");

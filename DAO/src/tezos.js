@@ -2,10 +2,10 @@ import { BeaconWallet } from '@taquito/beacon-wallet';
 import { TezosToolkit } from '@taquito/taquito';
 
 // Update CONTRACT_ADDRESS and other constants below as required
-const DAPP_NAME = "MinimalDAO"
+const DAPP_NAME = "Minimal-DAO-Framework"
 const RPC_URL = "https://granadanet.smartpy.io";
 const NETWORK = "granadanet"
-const CONTRACT_ADDRESS = "KT1MUgaUdvHRcnbp3WTZdkso81BgkR8sFZMu"
+const CONTRACT_ADDRESS = "KT1G75hhAE92rEATyrrJBEWsZLsefUFDoDLJ"
 
 // Initialize TezosToolkit
 const Tezos = new TezosToolkit(RPC_URL);
@@ -21,6 +21,11 @@ const wallet = new BeaconWallet({
 
 Tezos.setWalletProvider(wallet)
 
+const network = {
+    type: NETWORK,
+    rpcUrl: RPC_URL
+};
+
 
 // Create getActiveAccount function to connect with wallet
 const getActiveAccount = async () => {
@@ -28,10 +33,7 @@ const getActiveAccount = async () => {
 	
 	//no active account get permission first
 	if (!activeAccount) {
-		await wallet.requestPermissions({
-		type: NETWORK,
-		rpcUrl:RPC_URL
-		});
+		await wallet.requestPermissions({ network });
 		return getActiveAccount();
 	}
 	return activeAccount;

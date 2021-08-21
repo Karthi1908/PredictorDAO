@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../static/css/home.css'
-import Transfer from './Transfer.js';
+import SubmitOptions from './SubmitOptions.js';
 
 import {getContractStorage} from '../tezos';
 
@@ -8,14 +8,17 @@ import {getContractStorage} from '../tezos';
 function Home(){
 
     const [userData, setUserData] = useState([]);
-
+ 
     useEffect(() => {
         async function fetchStorage() {
             // Fetch data from contract
             let storage = await getContractStorage();
             let proposals = storage.proposals.valueMap;
+		
 	    let users = []
 	    proposals.forEach(proposal => {
+			proposal.end =  Date(proposal.end ).toString();
+			console.log(proposal.end);
     		users.push(proposal);
 		});
 		setUserData(users);
@@ -29,23 +32,30 @@ function Home(){
         <div className="container">
             <div className="row">
                 {userData.map((user, index) => 
-                    <div className="col-md-4" key={index}>
+                    <div className="col-md-8" key={index}>
                         <div className="card" >
                             <div className="card-header">
                                 <div className="Proposer">{user.proposer}</div>
                             </div>
                             <div className="card-body">
-                            	 <h5>Proposal:</h5>
-                                <h5 className="Proposal">{user.proposalName}</h5>
-                                 <h5>Proposal Options:</h5>
-                                <p className="Options" title = "Options">{user.proposalOptions}</p>
-                                <h5>Proposal Status:</h5>
-                                <p className="Status">{user.proposalStatus}</p>
-                                <h5>Proposal Result:</h5>
-                                 <p className="bio">{user.proposalVoteResult}</p>
-                                <Transfer
-                                    address={user.address}
-                                />
+                            	<tr>
+									<h6>Proposal &emsp;&emsp;&emsp;&emsp;:</h6> <td className="Proposal">&emsp;{user.proposalName}</td>
+								 </tr>
+								 <tr>
+									<h6>Proposal Options&ensp;:</h6> <td className="Options" title = "Options">&emsp; <SubmitOptions
+                                    pID={user.pID.c[0]}
+                                /></td>
+								 </tr>
+								 <tr>
+									<h6>Proposal Status &emsp;:</h6> <td className="Status">&emsp;{user.proposalStatus}</td>
+								</tr>
+								<tr>
+									<h6>Proposal Result &emsp;:</h6> <td className="bio">&emsp;{user.proposalVoteResult}</td>
+								</tr>
+								<tr>
+									<h6>Vote Close on &emsp;:</h6> <td className="bio">&emsp;{user.end}</td>
+								</tr>
+
                             </div>
                         </div>
                     </div>

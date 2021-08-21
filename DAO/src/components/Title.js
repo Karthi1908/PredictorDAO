@@ -8,7 +8,7 @@ function Title(){
         <nav className="navbar navbar-expand-lg">
 
 
-                <a className="navbar-brand mr-auto" href="#">MinimalDAO</a>
+                <a className="navbar-brand mr-auto" href="#">Minimal DAO Framework</a>
             <button className="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>

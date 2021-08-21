@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { getContract } from '../tezos';
+import Transfer from './Transfer.js';
 
 import '../static/css/register.css';
 import Modal from 'react-bootstrap/Modal';
@@ -7,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 function DaoDetails(){
-
+	const contractAddress = getContract();
     const [modalIsOpen, setIsOpen] = useState(false);
     const [daoName, setdaoName] = useState("");
     const [daoTokenId, setdaoTokenId] = useState("");
@@ -27,7 +28,7 @@ function DaoDetails(){
         // DaoDetails here
         
         const contract = await getContract();
-        const op =  await contract.methods.defineDAO(daoName=daoName, daoTokenId = daoTokenId, tokenSymbol = tokenSymbol, daoTokenLimit = daoTokenLimit ).send();
+        const op =  await contract.methods.defineDAO( daoName, daoTokenId, daoTokenLimit,tokenSymbol ).send();
         await op.confirmation();
         alert("DAO Details Updated!")
         
@@ -56,7 +57,7 @@ function DaoDetails(){
                     <Form.Group className="mb-3">
                         <Form.Label>Token Id</Form.Label>
                         <Form.Control 
-                            type="text" 
+                            type="number" 
                             placeholder="(numbers only)" 
                             id="daoTokenId"
                             onChange={e => setdaoTokenId(e.target.value)}
@@ -78,14 +79,13 @@ function DaoDetails(){
                     <Form.Group className="mb-3">
                         <Form.Label>Max Token Limit</Form.Label>
                         <Form.Control 
-                            type="text" 
+                            type="number" 
                             placeholder="(numbers only)" 
                             id="daoTokenLimit"
                             onChange={e => setdaoTokenLimit(e.target.value)}
                             value={daoTokenLimit}
                             classname="modal-input"/>
                     </Form.Group>
-
                    
                 </Modal.Body>
                 
@@ -94,7 +94,7 @@ function DaoDetails(){
                     <Button variant="primary" onClick={handleClick} className="modal-submit-btn">Submit</Button>
                 </Modal.Footer>
             </Modal>
-            <button onClick={openModal} className="btn btn-DaoDetails">Modify DaoDetails</button>
+            <button onClick={openModal} className="btn btn-DaoDetails">Modify DAO Details</button>
         </>
     );
 }
